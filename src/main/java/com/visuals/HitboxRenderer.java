@@ -6,7 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.VertexRendering;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.HostileEntity;
@@ -46,17 +46,16 @@ public class HitboxRenderer {
 			else if (e instanceof PassiveEntity) { if (!c.passive) continue; col = new float[]{0.3f, 1f, 0.3f}; }
 			else { if (!c.other) continue; col = new float[]{0.4f, 0.8f, 1f}; }
 
-			// smooth interpolated position
 			double dx = MathHelper.lerp(td, e.lastRenderX, e.getX()) - e.getX();
 			double dy = MathHelper.lerp(td, e.lastRenderY, e.getY()) - e.getY();
 			double dz = MathHelper.lerp(td, e.lastRenderZ, e.getZ()) - e.getZ();
 			Box box = e.getBoundingBox().offset(dx - cam.x, dy - cam.y, dz - cam.z);
 
-			WorldRenderer.drawBox(matrices, lines, box, col[0], col[1], col[2], 1f);
+			VertexRendering.drawBox(matrices, lines, box, col[0], col[1], col[2], 1f);
 
 			if (c.eyeLine) {
 				double eye = box.minY + e.getStandingEyeHeight();
-				WorldRenderer.drawBox(matrices, lines, box.minX, eye - 0.01, box.minZ,
+				VertexRendering.drawBox(matrices, lines, box.minX, eye - 0.01, box.minZ,
 						box.maxX, eye + 0.01, box.maxZ, 1f, 0.1f, 0.1f, 1f);
 			}
 		}
