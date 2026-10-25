@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "visuals",
+  "version": "${version}",
+  "name": "Visuals",
+  "description": "Custom hitboxes, crosshair and a settings GUI (Right Shift).",
+  "authors": ["you"],
+  "environment": "client",
+  "entrypoints": { "client": ["com.visuals.VisualsMod"] },
+  "mixins": ["visuals.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
